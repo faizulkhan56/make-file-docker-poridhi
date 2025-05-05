@@ -13,8 +13,10 @@ tag-frontend:
 
 push-frontend:
 	docker push $(DOCKER_USERNAME)/$(FRONTEND_IMAGE_NAME):$(FRONTEND_TAG)
+container-run:
+	docker run -dit -p 80:80 --name poridhi-fe $(DOCKER_USERNAME)/$(FRONTEND_IMAGE_NAME):$(FRONTEND_TAG)
 
-all-frontend: build-frontend tag-frontend push-frontend
+all-frontend: build-frontend tag-frontend push-frontend container-run
 
 build-backend:
 	docker build -t $(BACKEND_IMAGE_NAME) ./backend
